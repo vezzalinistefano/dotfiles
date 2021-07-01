@@ -93,6 +93,10 @@ alias lsla='ls -lhpvA --color=auto --group-directories-first'
 # Plugins
 # =======
 
+# autosuggestions plugin
+source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+. /etc/zsh_command_not_found
 # zsh syntax highlighting
 source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
 
