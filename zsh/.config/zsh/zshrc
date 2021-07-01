@@ -1,0 +1,98 @@
+# General settings
+# ================
+
+if [ -d "$HOME/.local/bin" ] ; then
+	export PATH=$PATH:"$HOME/.local/bin"
+fi
+
+# Starship prompt
+eval "$(starship init zsh)"
+
+export EDITOR=vim
+
+export TERM="xterm-256color"
+
+# History in cache directory:
+HISTSIZE=10000000
+SAVEHIST=10000000
+HISTFILE=~/.cache/zsh/history
+
+# Basic auto/tab complete:
+autoload -U compinit
+zstyle ':completion:*' menu select
+zmodload zsh/complist
+compinit
+_comp_options+=(globdots)		# Include hidden files.
+
+# vi mode
+bindkey -v
+export KEYTIMEOUT=1
+
+# Use vim keys in tab complete menu:
+bindkey -M menuselect 'h' vi-backward-char
+bindkey -M menuselect 'k' vi-up-line-or-history
+bindkey -M menuselect 'l' vi-forward-char
+bindkey -M menuselect 'j' vi-down-line-or-history
+bindkey -v '^?' backward-delete-char
+bindkey '^R' history-incremental-search-backward
+
+# Edit line in vim with ctrl-e:
+autoload edit-command-line; zle -N edit-command-line
+bindkey '^e' edit-command-line
+
+# ALIASES
+# =======
+
+# apt
+alias au="sudo apt update"
+alias aug="sudo apt upgrade -V"
+alias auu="sudo apt update && sudo apt upgrade -V"
+
+alias ai="sudo apt install"
+alias air="sudo apt install --reinstall"
+alias ar="sudo apt remove -V"
+
+alias as="apt search"
+alias ash="apt show"
+
+# package handling
+alias aac="sudo apt autoclean"
+alias aar="sudo apt autoremove -V"
+
+# vim
+alias vi='vim'
+alias v='vim'
+
+# cd into the previous working directory by omitting `cd`.
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+
+# Safer default for cp, mv, rm.  These will print a verbose output of
+# the operations.  If an existing file is affected, they will ask for
+# confirmation.  This can make things a bit more cumbersome, but is a
+# generally safer option.
+alias cp='cp -iv'
+alias mv='mv -iv'
+alias rm='rm -Iv'
+
+alias diff='diff --color=auto'
+
+alias grep='grep --color=auto'
+
+# Make ls a bit easier to read.  Note that the -A is the same as -a but
+# does not include implied paths (the current dir denoted by a dot and
+# the previous dir denoted by two dots).  I would also like to use the
+# -p option, which prepends a forward slash to directories, but it does
+# not seem to work with symlinked directories. For more, see `man ls`.
+alias ls='ls -pv --color=auto --group-directories-first'
+alias lsa='ls -pvA --color=auto --group-directories-first'
+alias lsl='ls -lhpv --color=auto --group-directories-first'
+alias lsla='ls -lhpvA --color=auto --group-directories-first'
+
+# Plugins
+# =======
+
+# zsh syntax highlighting
+source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
