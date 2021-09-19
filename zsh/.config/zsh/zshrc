@@ -60,8 +60,8 @@ alias aac="sudo apt autoclean"
 alias aar="sudo apt autoremove -V"
 
 # vim
-alias vi='vim'
-alias v='vim'
+alias vi='nvim'
+alias v='nvim'
 
 # cd into the previous working directory by omitting `cd`.
 alias ..='cd ..'
@@ -94,9 +94,9 @@ alias lsla='ls -lhpvA --color=auto --group-directories-first'
 # =======
 
 # autosuggestions plugin
-source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-. /etc/zsh_command_not_found
+#source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+#. /etc/zsh_command_not_found
 # zsh syntax highlighting
-source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+#source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 
