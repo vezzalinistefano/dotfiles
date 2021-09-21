@@ -1,0 +1,355 @@
+;ea=========================================================
+;
+; THIS IS AN EXAMPLE CONFIGURATION FILE!
+; IT IS NOT SUPPOSED TO WORK OUT OF THE BOX SINCE IS CONTAINS
+; SETTINGS THAT ARE SPECIFIC TO THE MACHINE WHICH WAS USED
+; TO GENERATE IT.
+; Please refer to the web documentation hosted at:
+; https://github.com/polybar/polybar#configuration
+; and
+; https://github.com/polybar/polybar/wiki/Configuration
+; if you want to automatically generate one for you.
+;
+;==========================================================
+;
+;
+;   ██████╗  ██████╗ ██╗  ██╗   ██╗██████╗  █████╗ ██████╗
+;   ██╔══██╗██╔═══██╗██║  ╚██╗ ██╔╝██╔══██╗██╔══██╗██╔══██╗
+;   ██████╔╝██║   ██║██║   ╚████╔╝ ██████╔╝███████║██████╔╝
+;   ██╔═══╝ ██║   ██║██║    ╚██╔╝  ██╔══██╗██╔══██║██╔══██╗
+;   ██║     ╚██████╔╝███████╗██║   ██████╔╝██║  ██║██║  ██║
+;   ╚═╝      ╚═════╝ ╚══════╝╚═╝   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝
+;
+;
+;   To learn more about how to configure Polybar
+;   go to https://github.com/polybar/polybar
+;
+;   The README contains a lot of information
+;
+;==========================================================
+
+[colors]
+    background                      = #282828
+    background-alt                  = #282828
+    foreground                      = #EBDBB2
+    primary                         = #FABD2F
+    alert                           = #BF616A
+    lightbg                         = #ECEFF4
+    color1                          = #BF616A
+    color8                          = #4C566A
+    color2                          = #A3BE8C
+    color3                          = #EBCB8B
+
+    red                             = #FB4934
+    green                           = #98971A
+    yellow                          = #D79921
+    blue                            = #458588
+    purple                          = #B16286
+    aqua                            = #689D6A
+    orange                          = #D65D0E
+
+[bar/mybar]
+    monitor                         = DP-0
+    width                           = 100%
+    height                          = 20
+    radius                          = 0
+    fixed-center                    = true
+
+    background                      = ${colors.background-alt}
+    foreground                      = ${colors.foreground}
+
+    line-size                       = 2
+
+    border-size                     = 0
+    border-color                    = ${colors.foreground}00
+
+    padding-left = 1
+    padding-right = 1
+
+    module-margin-left = 0
+    module-margin-right = 0
+
+    font-0                          = "UbuntuMono Nerd Font:size=11;2"
+    font-1                          = "UbuntuMono Nerd Font:size=13;3"
+    font-2                          = "Font Awesome 5 Free:style=Regular:pixelsize=8;1"
+    font-3                          = "Font Awesome 5 Free:style=Solid:pixelsize=8;1"
+    font-4                          = "Font Awesome 5 Free:style=Regular:pixelsize=8;1"
+    font-5                          = "UbuntuMono Nerd Font:size=11:style=Bold;2"
+
+    modules-left                    = i3 spotify 
+    modules-center                  = date
+    modules-right                   = arrow1 filesystem arrow2 pulseaudio-control arrow3 memory arrow4 cpu arrow-tray
+
+    tray-position                   = right
+    tray-detached                   = false
+    tray-maxsize                    = 20
+    tray-background                 = ${colors.background}
+    tray-padding                    = 0
+    tray-offset-x                   = 0
+    tray-offset-y                   = 0
+    tray-scale                      = 1.0
+
+    enable-ipc                      = true
+    separator                       = 
+
+    ; Fallback click handlers that will be called if
+    ; there's no matching module handler found.
+    click-left = 
+    click-middle = 
+    click-right =
+    scroll-up =
+    scroll-down =
+    double-click-left =
+    double-click-middle =
+    double-click-right =
+
+[module/xwindow]
+    type                            = internal/xwindow
+    label                           = "%title:0:30:...%"
+    format-padding                  = 3
+    ;format-underline                = ${colors.blue}
+
+[module/xkeyboard]
+    type                            = internal/xkeyboard
+    blacklist-0                     = num lock
+
+    format-prefix                   = " "
+    format-prefix-foreground        = ${colors.foreground-alt}
+    format-prefix-underline         = ${colors.secondary}
+
+    label-layout                    = %layout%
+    label-layout-underline          = ${colors.secondary}
+
+    label-indicator-padding         = 2
+    label-indicator-margin          = 1
+    label-indicator-background      = ${colors.secondary}
+    label-indicator-underline       = ${colors.secondary}
+
+[module/filesystem]
+    type                            = internal/fs
+    interval                        = 25
+
+    mount-0                         = /home
+
+    label-mounted                   = "%percentage_used%%"
+    label-mounted-foreground        = %{colors.foreground}}
+    label-unmounted                 = %mountpoint% not mounted
+    label-unmounted-foreground      = %{colors.foreground}
+
+    format-mounted                  = <label-mounted>
+    format-mounted-prefix           = " %{T2} %{T-}"
+    format-mounted-prefix-foreground = ${colors.foreground}
+    format-mounted-padding          = 1
+    format-mounted-background       = ${colors.aqua}
+
+[module/i3]
+    type = internal/i3
+    pin-workspace = true
+    strip-wsnumbers = false
+    index-sort = true
+
+    label-mode-padding = 3
+    label-mode-foreground = ${colors.foreground}
+
+    label-focused = %{T6}%index%%{T-}
+    label-focused-padding = 2
+    label-focused-background = ${colors.yellow}
+    label-focused-foreground = #000000
+
+    label-unfocused = %index%
+    label-unfocused-padding = 2
+
+    label-visible = %index%
+    label-visible-background = ${self.label-focused-background}
+    label-visible-underline = ${self.label-focused-underline}
+    label-visible-padding = ${self.label-focused-padding}
+    label-visible-foreground = ${self.label-focused-foreground}
+    
+[module/cpu]
+    type                            = internal/cpu
+    label                           = %percentage%%
+    format-prefix                   = "%{T2}龍 %{T-}"
+    format-padding                  = 1
+    format-foreground               = ${colors.foreground}
+    format-background               = ${colors.blue}
+
+[module/memory]
+    type                            = internal/memory
+    label                           = %gb_used%
+    format                          = <label>
+    format-prefix                   = "%{T2} %{T-}"
+    format-foreground               = ${colors.foreground}
+    format-background               = ${colors.green}
+    format-padding                  = 1
+
+[module/eth]
+type = internal/network
+interface = enp0s31f6
+interval = 3.0
+
+format-connected-underline = #55aa55
+format-connected-prefix = " "
+format-connected-prefix-foreground = ${colors.foreground-alt}
+label-connected = %local_ip%
+
+format-disconnected =
+;format-disconnected = <label-disconnected>
+;format-disconnected-underline = ${self.format-connected-underline}
+;label-disconnected = %ifname% disconnected
+;label-disconnected-foreground = ${colors.foreground-alt}
+
+[module/date]
+    type                        = internal/date
+    interval                    = 1.0
+
+    date                        = " %e %B %a"
+    time                        = "%H:%M"
+
+    format-prefix               = 
+    format-prefix-font          = 3
+
+    label = %date% %{T3} %{T-} %time%
+    label-foreground = ${colors.foreground}
+
+[module/pulseaudio]
+	type          = internal/pulseaudio
+	format-volume = <label-volume>
+    format-volume-foreground = ${colors.foreground}
+    format-volume-background = ${colors.green}
+
+	mapped = true
+
+	label-volume            = "VOL: %percentage%%"
+	label-volume-foreground = ${colors.foreground}
+	label-volume-padding    = 1
+
+	format-muted = <label-muted>
+
+	label-muted            = "0% (muted)"
+	;label-muted-background = ${xrdb:color0}
+	label-muted-padding    = 0
+
+	format-volume-padding = 0
+	format-muted-padding  = 0
+
+    click-right             = pavucontrol
+
+[module/temperature]
+type = internal/temperature
+thermal-zone = 0
+warn-temperature = 60
+
+format = <ramp> <label>
+format-underline = #f50a4d
+format-warn = <ramp> <label-warn>
+format-warn-underline = ${self.format-underline}
+
+label = %temperature-c%
+label-warn = %temperature-c%
+label-warn-foreground = ${colors.secondary}
+
+ramp-0 = 
+ramp-1 = 
+ramp-2 = 
+ramp-foreground = ${colors.foreground-alt}
+
+[module/powermenu]
+type = custom/menu
+
+expand-right = true
+
+format-spacing = 1
+
+label-open = 
+label-open-foreground = ${colors.secondary}
+label-close =  cancel
+label-close-foreground = ${colors.secondary}
+label-separator = |
+label-separator-foreground = ${colors.foreground-alt}
+
+menu-0-0 = reboot
+menu-0-0-exec = menu-open-1
+menu-0-1 = power off
+menu-0-1-exec = menu-open-2
+
+menu-1-0 = cancel
+menu-1-0-exec = menu-open-0
+menu-1-1 = reboot
+menu-1-1-exec = sudo reboot
+
+menu-2-0 = power off
+menu-2-0-exec = sudo poweroff
+menu-2-1 = cancel
+menu-2-1-exec = menu-open-0
+
+[settings]
+throttle-output = 5
+throttle-output-for = 10
+throttle-input-for = 30
+screenchange-reload = true
+compositing-background = over
+compositing-foreground = over
+compositing-overline = over
+compositing-underline = over
+compositing-border = over
+
+[global/wm]
+margin-top = 0
+margin-bottom = 0
+
+; vim:ft=dosini
+
+[module/spotify]
+    type = custom/script
+    interval = 1
+    format-prefix = " "
+    format = <label>
+    exec = python3 /home/zzave/scripts/polybar-spotify/spotify_status.py -f '{play_pause} {artist}: {song} '
+    format-underline = #1db954
+    format-padding  = 2
+
+[module/pulseaudio-control]
+    type = custom/script
+    tail = true
+    format-background = ${colors.orange}
+    label-padding = 2
+    label-foreground = ${colors.foreground}
+
+    exec = ~/.config/polybar/scripts/pulseaudio-control.sh --icons-volume " , " --icon-muted " " --sink-nicknames-from "device.description" --sink-nickname "alsa_output.pci-0000_09_00.1.hdmi-stereo:蓼 Speaker" --sink-nickname "alsa_output.usb-Creative_Technology_Ltd_Sound_BlasterX_G5_0200674F5B1-00.analog-stereo:  Cuffie" listen
+
+    click-right = exec pavucontrol &
+    click-left = ~/.config/polybar/scripts/pulseaudio-control.sh togmute
+    click-middle = ~/.config/polybar/scripts/pulseaudio-control.sh --sink-blacklist "alsa_output.pci-0000_0b_00.3.iec958-stereo" next-sink
+    scroll-up = ~/.config/polybar/scripts/pulseaudio-control.sh --volume-max 130 up
+    scroll-down = ~/.config/polybar/scripts/pulseaudio-control.sh --volume-max 130 down
+
+[module/arrow1]
+    type = custom/text
+    content = "%{T2} %{T-}"
+    content-foreground = ${colors.aqua}
+    content-background = ${colors.background-alt}
+
+[module/arrow2]
+    type = custom/text
+    content = "%{T2} %{T-}"
+    content-foreground = ${colors.orange}
+    content-background = ${colors.aqua}
+
+[module/arrow3]
+    type = custom/text
+    content = "%{T2} %{T-}"
+    content-foreground = ${colors.green}
+    content-background = ${colors.orange}
+
+[module/arrow4]
+    type = custom/text
+    content = "%{T2} %{T-}"
+    content-foreground = ${colors.blue}
+    content-background = ${colors.green}
+
+[module/arrow-tray]
+    type = custom/text
+    content = "%{T2} %{T-}"
+    content-foreground = ${colors.background}
+    content-background = ${colors.blue}
+
