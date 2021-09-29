@@ -4,11 +4,11 @@
 
 # terminal emulator
 super + {_, shift + } Return
-	{kitty tmux new-session -A -s 'Default', kitty}
+	{kitty, kitty tmux new-session -A -s 'Default'}
 
 # program launcher
 super + @space
-	rofi -show drun -show-icons -display-drun ">"
+	rofi -show drun -show-icons -display-drun "App"
 
 # Environment
 # -----------
@@ -88,6 +88,10 @@ super + {o,i}
 super + {_,shift + }{1-9,0}
 	bspc {desktop -f,node -d} {1-9,10}
 
+super + shift + {Left,Down,Up,Right}
+	dir={west,south,north,east}; \
+	bspc node -s "$dir.local" --follow \
+	    || bspc node -m "$dir" --follow
 #
 # preselect
 #
@@ -123,3 +127,7 @@ super + alt + shift + {h,j,k,l}
 # move a floating window
 super + {Left,Down,Up,Right}
 	bspc node -v {-20 0,0 20,0 -20,20 0}
+
+# screen lock
+ctrl + alt + l
+    dm-tool switch-to-greeter

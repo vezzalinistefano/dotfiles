@@ -2,21 +2,25 @@
 
 sxhkd &
 picom &
-mate-settings-daemon &
-feh --bg-fill ~/.local/share/wallpapers/0068.jpg
+~/.config/polybar/launch.sh &
+feh --bg-fill ~/.local/share/wallpapers/0068.jpg &
 
 bspc monitor DP-0 -d 1 2 3 4 5 
 bspc monitor HDMI-0  -d 6 7 8 9 10
 
-bspc config border_width         2
+bspc config border_width        2
 bspc config window_gap          8
+
 
 bspc config split_ratio          0.5
 bspc config borderless_monocle   true
 bspc config gapless_monocle      true
 
-bspc config pointer_modifier mod1
+bspc config pointer_modifier mod4
 bspc config pointer_action1 move
 bspc config pointer_action2 resize_side
+bspc config pointer_action3 resize_corner
+bspc config pointer_motion_interval 50 
 
-~/.config/polybar/launch.sh
+# Specific apps settings
+bspc rule -a MEGASync state=floating

@@ -55,6 +55,12 @@ alias ar="sudo apt remove -V"
 alias as="apt search"
 alias ash="apt show"
 
+# pacman
+
+alias pas="sudo pacman -S"
+alias pasyu="sudo pacman -Syu"
+alias par="sudo pacman -Rs"
+
 # package handling
 alias aac="sudo apt autoclean"
 alias aar="sudo apt autoremove -V"
@@ -94,9 +100,10 @@ alias lsla='ls -lhpvA --color=auto --group-directories-first'
 # =======
 
 # autosuggestions plugin
-#source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-#. /etc/zsh_command_not_found
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+source ~/.zsh/command-not-found/command-not-found.plugin.zsh
 # zsh syntax highlighting
-#source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 
