@@ -3,8 +3,8 @@
 #
 
 # terminal emulator
-super + {_, shift + } Return
-	{kitty, kitty tmux new-session -A -s 'Default'}
+super + KP_Enter
+    kitty
 
 # program launcher
 super + @space
@@ -20,6 +20,17 @@ super + e ; {p,s,c}
 	comptontoggle \
 	}
 
+# Power settings
+#
+# Screen locking
+alt + ctrl + l
+    slock
+
+alt + ctrl + s
+    systemctl suspend
+
+alt + ctrl + r
+    systemctl reboot
 #
 # bspwm hotkeys
 #
