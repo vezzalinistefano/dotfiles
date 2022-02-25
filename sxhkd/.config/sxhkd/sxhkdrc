@@ -8,14 +8,13 @@ super + KP_Enter
 
 # program launcher
 super + @space
-	rofi -show drun -show-icons -display-drun "App"
+	dmenu_run -p "Run command"
 
 # Environment
 # -----------
 
-super + e ; {p,s,c}
+super + e ; {s,c}
 	{ \
-	rofi_power_menu, \
 	pkill -usr1 -x sxhkd; notify-send 'sxhkd' 'Reloaded config', \
 	comptontoggle \
 	}
@@ -30,7 +29,7 @@ alt + ctrl + s
     systemctl suspend
 
 alt + ctrl + r
-    systemctl reboot
+    systemctl reboo
 #
 # bspwm hotkeys
 #
@@ -138,7 +137,3 @@ super + alt + shift + {h,j,k,l}
 # move a floating window
 super + {Left,Down,Up,Right}
 	bspc node -v {-20 0,0 20,0 -20,20 0}
-
-# screen lock
-ctrl + alt + l
-    dm-tool switch-to-greeter

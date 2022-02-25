@@ -1,23 +1,18 @@
 "
-" ~/.vimrc
+" ~/.config/nvim/init.vim
 "
+
+call plug#begin(stdpath('data') . '/plugged')
+
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+
+call plug#end()
 
 set nocompatible
 filetype off
 
-" Plugins
-" =======
-" call plug#begin('~/.vim/plugged')
-"   
-"         Plug 'itchyny/lightline.vim'
-"         Plug 'arcticicestudio/nord-vim'
-" 	Plug 'morhetz/gruvbox'
-" 	Plug 'ap/vim-css-color' 
-" 
-" call plug#end()
-
-" Basic stuff
-" ===========
+" Set
+" ------------------------------------------------------------------------------
 set title
 set noerrorbells
 syntax on
@@ -39,12 +34,11 @@ set colorcolumn=80
 set cursorline
 set ruler
 filetype plugin indent on
-syntax on
 set encoding=utf-8
 set number relativenumber
+set expandtab                   " Use spaces instead of tabs.
 
 highlight ColorColumn ctermbg=0 guibg=black
 
-" Text, tab and indent related
-" ============================
-set expandtab                   " Use spaces instead of tabs.
+syntax enable
+colorscheme tempus_night
