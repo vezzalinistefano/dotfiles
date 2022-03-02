@@ -5,6 +5,8 @@
 call plug#begin(stdpath('data') . '/plugged')
 
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'dracula/vim', { 'name': 'dracula' }       
+Plug 'ap/vim-css-color' 
 
 call plug#end()
 
@@ -36,7 +38,10 @@ set ruler
 filetype plugin indent on
 set encoding=utf-8
 set number relativenumber
+
 set expandtab                   " Use spaces instead of tabs.
+set tabstop=4
+set shiftwidth=4
 
 highlight ColorColumn ctermbg=0 guibg=black
 
