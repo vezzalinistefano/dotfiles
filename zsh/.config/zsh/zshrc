@@ -1,86 +1,186 @@
+#
+# ~/.config/zsh/zshrc
+#
+# zsh shell configuration file
+
+# Check existance of a command
+_check() {
+	command -v "$1" > /dev/null
+}
+
 # General settings
-# ================
+# -----------------------------------------------------------------------------
+## Include personal scripts and binaries
 if [ -d "$HOME/.local/bin" ] ; then
 	export PATH=$PATH:"$HOME/.local/bin"
 fi
 
-# Starship prompt
+# Add go to path if present
+if [ -d "$HOME/.local/go/bin" ] ; then
+	export PATH=$PATH:"$HOME/.local/go/bin"
+    export GOPATH="$HOME/go"
+fi
+
+## Starship prompt
 eval "$(starship init zsh)"
 
-export EDITOR=vim
+## Editor settings
+if _check nvim; then
+    export EDITOR="nvim"
+else
+    export EDITOR="vim"
+fi
 
-export TERM="xterm-256color"
-
-# History in cache directory:
+## History in cache directory:
 HISTSIZE=10000000
 SAVEHIST=10000000
 HISTFILE=~/.cache/zsh/history
 
-# Basic auto/tab complete:
+## Basic auto/tab complete:
 autoload -U compinit
 zstyle ':completion:*' menu select
 zmodload zsh/complist
 compinit
-_comp_options+=(globdots)		# Include hidden files.
+_comp_options+=(globdots) # Include hidden files.
 
-# ALIASES
-# =======
+# Aliases
+# -----------------------------------------------------------------------------
 
-# apt
+## apt
+### up(dating, grading), the -V shows version changes.
 alias au="sudo apt update"
 alias aug="sudo apt upgrade -V"
 alias auu="sudo apt update && sudo apt upgrade -V"
 
+### act on package targets
 alias ai="sudo apt install"
 alias air="sudo apt install --reinstall"
 alias ar="sudo apt remove -V"
 
+### act on the repos
 alias as="apt search"
 alias ash="apt show"
 
-# package handling
+### package handling
 alias aac="sudo apt autoclean"
 alias aar="sudo apt autoremove -V"
 
-# vim
-alias vim='nvim'
-alias vi='nvim'
-alias v='nvim'
+## Git commands
+if _check git; then
+    #export GIT_EDITOR="$EDITOR"
 
-# cd into the previous working directory by omitting `cd`.
+    ### add, commit
+    alias gadd="git add -v"
+    alias gaddi="git add --interactive"
+    alias gcom="git commit"
+    alias gcomm="git commit -m"
+
+    ### logs
+    alias glog="git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all"
+
+    alias glo="git log --oneline"
+    alias gsho="git show --oneline"
+    alias gsh="git show"
+    alias gsta="git status"
+    alias gst="git status"
+
+    ### branching
+	alias gch='git checkout'
+	alias gchb='git checkout -b'
+	alias gbd='git branch -d'
+	alias gbl='git branch --list'
+	alias gpd='git push origin --delete'
+	alias gmerg='git merge --edit --stat'
+	alias gmerge='git merge --edit --stat'
+fi
+
+## Kubernetes
+if _check kubectl; then
+    alias kuaf="kubectl apply -f"
+fi
+
+## vim & neovim
+if _check nvim; then
+	alias vim='nvim'
+	alias vi='nvim'
+	alias v='nvim'
+else
+	alias vi='vim'
+	alias v='v'
+fi
+
+## Flatpak commands
+if _check flatpak; then
+    alias fli="flatpak install" # must be followed by a source, e.g. fli flathub
+	alias fliu="flatpak uninstall"
+	alias flls="flatpak list --app --columns='desc,app,orig'"
+	alias flu="flatpak update"
+fi
+
+## cd into the previous working directory by omitting `cd`.
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 
-# Safer default for cp, mv, rm.  These will print a verbose output of
-# the operations.  If an existing file is affected, they will ask for
-# confirmation.  This can make things a bit more cumbersome, but is a
-# generally safer option.
+## Safer default for cp, mv, rm.  These will print a verbose output of
+## the operations.  If an existing file is affected, they will ask for
+## confirmation.  This can make things a bit more cumbersome, but is a
+## generally safer option.
 alias cp='cp -iv'
 alias mv='mv -iv'
 alias rm='rm -Iv'
 
+## color=auto some stuff
 alias diff='diff --color=auto'
 
-alias grep='grep --color=auto'
+alias dir='dir --color=auto'
+alias vdir='vdir --color=auto'
 
-# Make ls a bit easier to read.  Note that the -A is the same as -a but
-# does not include implied paths (the current dir denoted by a dot and
-# the previous dir denoted by two dots).  I would also like to use the
-# -p option, which prepends a forward slash to directories, but it does
-# not seem to work with symlinked directories. For more, see `man ls`.
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+
+## Make ls a bit more functional
 alias ls='ls -pv --color=auto --group-directories-first'
 alias lsa='ls -pvA --color=auto --group-directories-first'
 alias lsl='ls -lhpv --color=auto --group-directories-first'
 alias lsla='ls -lhpvA --color=auto --group-directories-first'
 
-# Plugins
+# Functions
+# -----------------------------------------------------------------------------
+## Colourise man pages
+man() {
+	env \
+	LESS_TERMCAP_mb=$(tput bold; tput setaf 6) \
+	LESS_TERMCAP_md=$(tput bold; tput setaf 6) \
+	LESS_TERMCAP_me=$(tput sgr0) \
+	LESS_TERMCAP_se=$(tput rmso; tput sgr0) \
+	LESS_TERMCAP_ue=$(tput rmul; tput sgr0) \
+	LESS_TERMCAP_us=$(tput smul; tput bold; tput setaf 4) \
+	LESS_TERMCAP_mr=$(tput rev) \
+	LESS_TERMCAP_mh=$(tput dim) \
+	LESS_TERMCAP_ZN=$(tput ssubm) \
+	LESS_TERMCAP_ZV=$(tput rsubm) \
+	LESS_TERMCAP_ZO=$(tput ssupm) \
+	LESS_TERMCAP_ZW=$(tput rsupm) \
+		man "$@"
+}
+
+## Enter directory and list contents
+cd() {
+	if [ -n "$1" ]; then
+		builtin cd "$@" && ls -pvA --color=auto --group-directories-first
+	else
+		builtin cd ~ && ls -pvA --color=auto --group-directories-first
+	fi
+}
+
+# TODO Plugins
 # =======
 
 # autosuggestions plugin
-#source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 #source ~/.zsh/command-not-found/command-not-found.plugin.zsh
 # zsh syntax highlighting
-#source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
+source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

@@ -1,24 +1,66 @@
 #! /bin/sh
 
-sxhkd &
-compton &
-~/.config/polybar/launch.sh &
-mate-settings-daemon
+# ~/.config/bspwm/bspwmrc
+#
+# Configuration file for bspwm
 
-bspc monitor eDP-1 -d 1 2 3 4 5 6 7 8 9 10
+# Essentials
+# -----------------------------------------------------------------------------
+## Truncate a pair of common commands frequently used
+_bc() {
+	bspc config "$@"
+}
 
-bspc config border_width        2
-bspc config window_gap          12
+_check() {
+	command -v "$1" > /dev/null
+}
 
-bspc config split_ratio          0.5
-bspc config borderless_monocle   true
-bspc config gapless_monocle      true
 
-bspc config pointer_modifier mod4
-bspc config pointer_action1 move
-bspc config pointer_action2 resize_side
-bspc config pointer_action3 resize_corner
-bspc config pointer_motion_interval 50 
+# Visual options
+# -----------------------------------------------------------------------------
+_bc automatic_scheme longest_side
+_bc initial_polarity second_child
+_bc split_ratio	0.5
+_bc border_width 2
+_bc window_gap 8
+_bc pointer_modifier mod4
+_bc config pointer_motion interval 40
 
-# Specific apps settings
-# bspc rule -a MEGASync state=floating
+## Determine XrandR settings
+#_check ~/.local/bin/bspwm_dual_monitor && ~/.local/bin/bspwm_dual_monitor
+xrandr --output DP-0 --primary --mode 1920x1080 --rotate normal \
+    --output HDMI-0 --mode 1920x1080 --rotate normal --left-of DP-0 &
+
+## Define desktops per monitor
+#_check ~/.local/bin/bspwm_conf_desktops && ~/.local/bin/bspwm_conf_desktops
+bspc monitor DP-0 -d 1 2 3 4 5 6
+bspc monitor HDMI-0 -d 7 8 9 10
+
+## TODO Borders settings
+# source $HOME/.local/share/my_colours/tempus_night.sh
+_bc normal_border_color "#312e30"
+_bc active_border_color "#b1942b"
+_bc focused_border_color "#6da280"
+_bc presel_feedback_color "#2a2829"
+
+# Autostart
+# -----------------------------------------------------------------------------
+## Hotkey daemon
+_check sxhkd && sxhkd & 
+
+## Compositor
+_check picom && picom &
+
+## Polybar
+_check polybar && $HOME/.config/polybar/launch.sh &
+
+## Background setting
+_check feh && feh --bg-fill "$HOME/.local/share/backgrounds/001.jpg" &
+
+_check flameshot && flameshot &
+
+_check pasystray && pasystray &
+
+## start the MATE settings daemon to apply GTK themes to running
+## applications as well as flatpaks (see the `tempus` script).
+_check mate-settings-daemon && mate-settings-daemon &

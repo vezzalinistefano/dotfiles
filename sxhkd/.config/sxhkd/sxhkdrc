@@ -1,35 +1,30 @@
 #
-# wm independent hotkeys
+# ~/.config/sxhkd/sxhkdrc
 #
 
 # terminal emulator
-super + KP_Enter
-    kitty
+super + {_, shift + } Return
+    {alacritty, alacritty -e tmux new-session -A -s 'Default'}
 
 # program launcher
 super + @space
-	dmenu_run -p "Run command"
+    rofi -show drun -show-icons -font "hack 11" -display-drun ">>>"
+
+super + d
+    rofi -show drun -show-icons -font "hack 11" -display-drun ">>>"
+
+# Invoke the session management menu (log out, lock, reboot, shutdown).
+ctrl + alt + l
+    slock
 
 # Environment
-# -----------
-
+# -----------------------------------------------------------------------------
 super + e ; {s,c}
 	{ \
 	pkill -usr1 -x sxhkd; notify-send 'sxhkd' 'Reloaded config', \
 	comptontoggle \
 	}
 
-# Power settings
-#
-# Screen locking
-alt + ctrl + l
-    slock
-
-alt + ctrl + s
-    systemctl suspend
-
-alt + ctrl + r
-    systemctl reboo
 #
 # bspwm hotkeys
 #
@@ -68,7 +63,7 @@ super + ctrl + {m,x,y,z}
 # focus/swap
 #
 
-# focus the node in the given direction
+# focus{move} the node in the given direction
 super + {_,shift + }{h,j,k,l}
 	bspc node -{f,s} {west,south,north,east}
 
