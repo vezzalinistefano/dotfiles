@@ -15,7 +15,7 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'morhetz/gruvbox'
     Plug 'catppuccin/nvim', {'as': 'catppuccin'}
     Plug 'tpope/vim-fugitive'
-
+    Plug 'Yggdroot/indentLine' 
     Plug 'nvim-lualine/lualine.nvim'
     " If you want to have icons in your statusline choose one of these
     Plug 'kyazdani42/nvim-web-devicons'
