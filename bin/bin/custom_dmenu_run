@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# get the colours
+source $HOME/.local/share/my_colours/tempus_night.sh
+
+dmenu_run -p "Run>" -nb "$colbg" -nf "$colfg" -sb "$col4" -sf "$colbg" \
+    -fn "Fire Code Medium:pixelsize=12" -b
