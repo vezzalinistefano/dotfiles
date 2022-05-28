@@ -1,3 +1,0 @@
-if ! pkill -x compton; then
-	exec compton
-fi
