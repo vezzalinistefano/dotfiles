@@ -63,4 +63,4 @@ _check pasystray && pasystray &
 
 ## start the MATE settings daemon to apply GTK themes to running
 ## applications as well as flatpaks (see the `tempus` script).
-_check mate-settings-daemon && mate-settings-daemon &
+_check redshift && redshift -l 44.570480:10.905630 &
