@@ -19,14 +19,9 @@ if [ -d "$HOME/bin" ] ; then
 	export PATH=$PATH:"$HOME/bin"
 fi
 
-# Add go to path if present
-if [ -d "$HOME/.local/go/bin" ] ; then
-	export PATH=$PATH:"$HOME/.local/go/bin"
-    export GOPATH="$HOME/go"
-fi
-
 if [ -d "$HOME/go" ] ; then
 	export GOPATH=$HOME/go
+	export PATH=$PATH:"$HOME/go/bin"
 fi
 
 ## Starship prompt
