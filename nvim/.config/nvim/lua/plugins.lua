@@ -47,6 +47,9 @@ return require('packer').startup(function()
 
   -- Colorschemes
   use 'https://gitlab.com/protesilaos/tempus-themes-vim.git'
+  use 'glepnir/zephyr-nvim'
+  use { "ellisonleao/gruvbox.nvim" }
+  use 'RRethy/nvim-base16'
 
   -- Syntax highlighting
   use 'nvim-treesitter/nvim-treesitter'
