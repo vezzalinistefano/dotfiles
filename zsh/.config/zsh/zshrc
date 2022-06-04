@@ -24,6 +24,10 @@ if [ -d "$HOME/go" ] ; then
 	export PATH=$PATH:"$HOME/go/bin"
 fi
 
+if [ -d "$HOME/.dotnet/tools/csharp-ls" ] ; then
+	export PATH=$PATH:"$HOME/.dotnet/tools/csharp-ls"
+fi
+
 ## Starship prompt
 eval "$(starship init zsh)"
 
