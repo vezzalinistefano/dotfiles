@@ -128,3 +128,5 @@ lspconfig.gopls.setup {
     },
   },
 }
+
+lspconfig.csharp_ls.setup{}
