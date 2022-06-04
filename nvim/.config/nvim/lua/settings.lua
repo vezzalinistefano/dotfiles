@@ -16,7 +16,7 @@ vim.opt.completeopt = 'menu,menuone,noselect'
 
 -- Colors
 vim.opt.syntax = 'enable'
-vim.cmd([[ colorscheme tempus_night ]])
+vim.cmd([[colorscheme tempus_night]])
 
 -- Tab and indent related
 vim.opt.tabstop = 4
