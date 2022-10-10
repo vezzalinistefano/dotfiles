@@ -28,12 +28,16 @@ if [ -d "$HOME/.dotnet/tools/csharp-ls" ] ; then
 	export PATH=$PATH:"$HOME/.dotnet/tools/csharp-ls"
 fi
 
+export _JAVA_AWT_WM_NONREPARENTING=1
+
 ## Starship prompt
 eval "$(starship init zsh)"
+#export STARSHIP_CONFIG=$HOME/.config/starship/starship.toml
 
 ## Editor settings
 if _check nvim; then
     export EDITOR="nvim"
+	alias vimg="nvim +G +only"
 else
     export EDITOR="vim"
 fi
@@ -52,25 +56,32 @@ _comp_options+=(globdots) # Include hidden files.
 
 # Aliases
 # -----------------------------------------------------------------------------
-
+## Pacman
+if _check pacman; then
+	alias pass="pacman -Ss" # search
+	alias pas="sudo pacman -S" # install
+	alias pasyu="sudo pacman -Syu"
+fi
 ## apt
-### up(dating, grading), the -V shows version changes.
-alias au="sudo apt update"
-alias aug="sudo apt upgrade -V"
-alias auu="sudo apt update && sudo apt upgrade -V"
+if _check apt; then
+	### up(dating, grading), the -V shows version changes.
+	alias au="sudo apt update"
+	alias aug="sudo apt upgrade -V"
+	alias auu="sudo apt update && sudo apt upgrade -V"
 
-### act on package targets
-alias ai="sudo apt install"
-alias air="sudo apt install --reinstall"
-alias ar="sudo apt remove -V"
+	### act on package targets
+	alias ai="sudo apt install"
+	alias air="sudo apt install --reinstall"
+	alias ar="sudo apt remove -V"
 
-### act on the repos
-alias as="apt search"
-alias ash="apt show"
+	### act on the repos
+	alias as="apt search"
+	alias ash="apt show"
 
-### package handling
-alias aac="sudo apt autoclean"
-alias aar="sudo apt autoremove -V"
+	### package handling
+	alias aac="sudo apt autoclean"
+	alias aar="sudo apt autoremove -V"
+fi
 
 if _check kubectl; then
 	alias k="kubectl"
@@ -134,6 +145,13 @@ if _check flatpak; then
 	alias flu="flatpak update"
 fi
 
+## MPV
+if _check mpv; then
+	alias mpvna="mpv --no-audio"
+	alias mpvnv="mpv --no-video"
+	#alias mpvyt="mpv --ytdl-format=best --fs '$(xclip -o)'"
+fi
+
 ## cd into the previous working directory by omitting `cd`.
 alias ..='cd ..'
 alias ...='cd ../..'
@@ -193,6 +211,12 @@ cd() {
 }
 
 # autosuggestions plugin
-source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 # zsh syntax highlighting
-source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+export PATH=$PATH:/home/sv/.local/bin
+
+# Azure CLI completition
+autoload bashcompinit && bashcompinit
+source '/home/sv/.local/bin/azure-cli/az.completion'
