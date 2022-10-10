@@ -11,18 +11,22 @@ super + @space
     rofi -show drun -show-icons -font "hack 11" -display-drun "App"
 
 super + d
-    rofi -show drun -show-icons -font "Iosevka 12" -display-drun "App"
+    rofi -show drun -show-icons -font "JetBrains Mono Nerd Font 10" -display-drun ">"
 
 # Invoke the session management menu (log out, lock, reboot, shutdown).
 ctrl + alt + l
     slock
 
+ctrl + alt + s
+    systemctl suspend
+
 # Environment
 # -----------------------------------------------------------------------------
-super + e ; {s,c}
+super + e ; {s,c,p}
 	{ \
 	pkill -usr1 -x sxhkd; notify-send 'sxhkd' 'Reloaded config', \
-	comptontoggle \
+	comptontoggle, \
+	polybar_restart \
 	}
 
 #
