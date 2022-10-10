@@ -24,12 +24,14 @@ _bc split_ratio	0.5
 _bc border_width 2
 _bc window_gap 8
 _bc pointer_modifier mod4
-_bc config pointer_motion interval 40
+_bc borderless_monocle true
+_bc single_monocle true
+_bc gapless_monocle false
 
 ## Determine XrandR settings
 #_check ~/.local/bin/bspwm_dual_monitor && ~/.local/bin/bspwm_dual_monitor
 xrandr --output DP-0 --primary --mode 1920x1080 --rotate normal \
-    --output HDMI-0 --mode 1920x1080 --rotate normal --left-of DP-0 &
+    --output HDMI-0 --mode 1920x1080 --rate 75 --rotate normal --left-of DP-0 &
 
 ## Define desktops per monitor
 #_check ~/.local/bin/bspwm_conf_desktops && ~/.local/bin/bspwm_conf_desktops
@@ -48,19 +50,32 @@ _bc presel_feedback_color "#2a2829"
 ## Hotkey daemon
 _check sxhkd && sxhkd & 
 
-## Compositor
-_check picom && picom &
-
 ## Polybar
 _check polybar && $HOME/.config/polybar/launch.sh &
 
 ## Background setting
-_check feh && feh --bg-fill "$HOME/.local/share/backgrounds/001.jpg" &
+_check nitrogen && nitrogen --restore &
 
 _check flameshot && flameshot &
 
 _check pasystray && pasystray &
 
-## start the MATE settings daemon to apply GTK themes to running
-## applications as well as flatpaks (see the `tempus` script).
 _check redshift && redshift -l 44.570480:10.905630 &
+
+## Use the same cursor everywhere
+_check xsetroot && xsetroot -xcf /usr/share/icons/Adwaita/cursors/left_ptr 16
+
+## Compositor
+_check picom && picom &
+
+## SSH agent
+if ! pgrep -u "$USER" ssh-agent > /dev/null; then
+    ssh-agent -t 1h > "$XDG_RUNTIME_DIR/ssh-agent.env"
+fi
+if [[ ! "$SSH_AUTH_SOCK" ]]; then
+    source "$XDG_RUNTIME_DIR/ssh-agent.env" >/dev/null
+fi
+
+# Authentication agent
+auth_agent="/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
+_check $auth_agent && $auth_agent
