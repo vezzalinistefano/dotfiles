@@ -1,25 +1,29 @@
-vim.opt.path = vim.opt.path + '**'
-vim.opt.wildmenu = true
-vim.opt.incsearch = true
-vim.opt.hidden = true
-vim.opt.backup = false
-vim.opt.swapfile = false
-vim.opt.number = true
-vim.opt.relativenumber = true
-vim.opt.cursorline = true
-vim.opt.ruler = true
-vim.opt.clipboard = 'unnamedplus'
-vim.opt.fileencoding = 'UTF-8'
-vim.opt.termguicolors = true
-vim.opt.incsearch = true
-vim.opt.completeopt = 'menu,menuone,noselect'
+local o = vim.opt
 
--- Colors
-vim.opt.syntax = 'enable'
-vim.cmd([[colorscheme tempus_night]])
+o.path 				= o.path + '**'
+o.wildmenu 			= true
+o.incsearch 		= true
+o.hidden 			= true
+o.backup 			= false
+o.swapfile 			= false
+o.number 			= true
+o.relativenumber 	= true
+o.cursorline 		= true
+o.ruler 			= true
+o.clipboard 		= 'unnamedplus'
+o.fileencoding 		= 'UTF-8'
+o.termguicolors 	= true
+o.incsearch 		= true
+o.completeopt 		= 'menu,menuone,noselect'
+o.termguicolors 	= true
 
 -- Tab and indent related
-vim.opt.tabstop = 4
-vim.opt.shiftwidth = 4
+o.tabstop 			= 4
+o.shiftwidth 		= 4
+
+-- Colors
+o.syntax 			= 'enable'
+vim.cmd([[colorscheme base16-gruvbox-dark-pale]])
+
 
 

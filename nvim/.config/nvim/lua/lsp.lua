@@ -129,4 +129,6 @@ lspconfig.gopls.setup {
   },
 }
 
+lspconfig.pyright.setup{}
+
 lspconfig.csharp_ls.setup{}

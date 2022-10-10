@@ -37,6 +37,8 @@ return require('packer').startup(function()
     end
   }
 
+  use 'norcalli/nvim-colorizer.lua'
+
   -- Neovim LSP
   use 'neovim/nvim-lspconfig'
   use 'hrsh7th/cmp-nvim-lsp'
