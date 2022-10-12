@@ -20,6 +20,10 @@ ctrl + alt + l
 ctrl + alt + s
     systemctl suspend
 
+# Take screenshot
+super + shift + s
+	flameshot gui
+
 # Environment
 # -----------------------------------------------------------------------------
 super + e ; {s,c,p}
