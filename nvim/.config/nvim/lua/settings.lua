@@ -23,7 +23,7 @@ o.shiftwidth 		= 4
 
 -- Colors
 o.syntax 			= 'enable'
-vim.cmd([[colorscheme base16-gruvbox-dark-pale]])
+vim.cmd([[colorscheme gruvbox]])
 
 
 

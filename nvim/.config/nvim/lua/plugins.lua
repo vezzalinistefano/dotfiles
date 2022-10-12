@@ -25,6 +25,8 @@ return require('packer').startup(function()
   }
   }
 
+  use {'akinsho/bufferline.nvim', tag = "v2.*", requires = 'kyazdani42/nvim-web-devicons'}
+
   -- Vim git integration
   use 'tpope/vim-fugitive'
 
@@ -37,6 +39,7 @@ return require('packer').startup(function()
     end
   }
 
+
   use 'norcalli/nvim-colorizer.lua'
 
   -- Neovim LSP
@@ -48,10 +51,7 @@ return require('packer').startup(function()
   use 'hrsh7th/nvim-cmp'
 
   -- Colorschemes
-  use 'https://gitlab.com/protesilaos/tempus-themes-vim.git'
-  use 'glepnir/zephyr-nvim'
   use { "ellisonleao/gruvbox.nvim" }
-  use 'RRethy/nvim-base16'
 
   -- Syntax highlighting
   use 'nvim-treesitter/nvim-treesitter'
