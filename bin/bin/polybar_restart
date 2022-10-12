@@ -1,4 +1,4 @@
 #!/bin/bash
 
-~/.config/polybar/launch.sh
+~/.config/polybar/launch.sh > /dev/null
 notify-send 'Polybar' 'Reloaded config'
