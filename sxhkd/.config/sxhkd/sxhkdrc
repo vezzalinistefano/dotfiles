@@ -11,14 +11,14 @@ super + @space
     rofi -show drun -show-icons -font "hack 11" -display-drun "App"
 
 super + d
-    rofi -show drun -show-icons -font "JetBrains Mono Nerd Font 10" -display-drun ">"
+    rofi -show drun -show-icons -font "hack 11" -display-drun "App"
 
 # Invoke the session management menu (log out, lock, reboot, shutdown).
-ctrl + alt + l
-    slock
-
-ctrl + alt + s
-    systemctl suspend
+ctrl + alt + {l, s}
+    { \
+    /home/sv/bin/slock_turnoff_screen, \
+    systemctl suspend \
+    }
 
 # Take screenshot
 super + shift + s

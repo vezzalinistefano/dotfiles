@@ -67,10 +67,6 @@ _check xsetroot && xsetroot -xcf /usr/share/icons/Adwaita/cursors/left_ptr 16
 ## Compositor
 _check picom && picom &
 
-# Authentication agent
-auth_agent="/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
-_check $auth_agent && $auth_agent &
-
 ## SSH agent
 if ! pgrep -u "$USER" ssh-agent > /dev/null; then
     ssh-agent -t 1h > "$XDG_RUNTIME_DIR/ssh-agent.env"
@@ -79,3 +75,6 @@ if [[ ! "$SSH_AUTH_SOCK" ]]; then
     source "$XDG_RUNTIME_DIR/ssh-agent.env" >/dev/null
 fi
 
+# Authentication agent
+auth_agent="/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
+_check $auth_agent && $auth_agent

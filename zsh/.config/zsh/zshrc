@@ -32,7 +32,6 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 
 ## Starship prompt
 eval "$(starship init zsh)"
-#export STARSHIP_CONFIG=$HOME/.config/starship/starship.toml
 
 ## Editor settings
 if _check nvim; then
@@ -60,7 +59,11 @@ _comp_options+=(globdots) # Include hidden files.
 if _check pacman; then
 	alias pass="pacman -Ss" # search
 	alias pas="sudo pacman -S" # install
+	alias par="sudo pacman -R" # remove
 	alias pasyu="sudo pacman -Syu"
+
+	# Fix sometime borken pacman installation
+	alias pasyuk="sudo pacman -Sy archlinux-keyring"
 fi
 ## apt
 if _check apt; then
@@ -210,17 +213,19 @@ cd() {
 	fi
 }
 
-if ! pgrep -u "$USER" ssh-agent > /dev/null; then
-    ssh-agent -t 1h > "$XDG_RUNTIME_DIR/ssh-agent.env"
-fi
-if [[ ! -f "$SSH_AUTH_SOCK" ]]; then
-    source "$XDG_RUNTIME_DIR/ssh-agent.env" > /dev/null
+# PLUGINS
+
+plugins=(ssh-agent)
+
+if [ ! -d ~/.local/share/zsh/plugins/colorize ]; then 
+	git clone --depth 1 https://github.com/zpm-zsh/colorize ~/.local/share/zsh/plugins/colorize
 fi
 
 # autosuggestions plugin
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 # zsh syntax highlighting
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source ~/.local/share/zsh/plugins/colorize/colorize.plugin.zsh
 
 export PATH=$PATH:/home/sv/.local/bin
 
