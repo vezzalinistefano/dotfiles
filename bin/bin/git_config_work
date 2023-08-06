@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+git config user.email "stefano@officinetelematiche.com"
+git config user.name "stefanovezzalini"

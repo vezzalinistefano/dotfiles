@@ -1,0 +1,7 @@
+#!/bin/env bash
+
+BACKGROUND=$1
+
+wal -i $1 -n -s
+
+$HOME/alacritty-color-export/script.sh

@@ -1,0 +1,136 @@
+[module/bspwm]
+	type = internal/bspwm
+
+	label-focused = " %name% " 
+	label-focused-foreground = ${colors.col0}
+    label-focused-background = ${colors.col3}
+	label-focused-padding = 0
+
+	label-occupied = " %name% "
+	label-occupied-foreground = ${colors.colfg}
+	label-occupied-padding = 0
+
+	# Hide empty
+	label-empty = " %name% "
+    label-empty-foreground = ${colors.gray}
+	label-empty-padding = 0
+
+	label-urgent = " %name%! "
+	label-urgent-foreground = ${colors.colfg}
+	label-urgent-padding = 0
+
+    label-separator=" "
+
+[module/spotify]
+	type             = custom/script
+	tail             = true
+	interval         = 1
+	; prefix symbol is shown before the text
+	format-prefix    = ""
+	format           = <label>
+	exec             = ~/.config/polybar/scripts/get_spotify_status.sh
+	label            =  %output:0:38:...%
+	label-font       = 6
+	label-foreground = ${colors.primary}
+[module/date]
+	type 		= internal/date
+	interval	= 1.0
+
+	time 		= "%H:%M:%S"
+	date 		= "%a, %b %e"
+
+	label		= %date% %time% 
+	label-foreground = ${color.white}
+
+[network-base]
+	type                = internal/network
+	interval            = 5
+	format-connected    = <label-connected>
+	format-disconnected = <label-disconnected>
+	label-disconnected  = Disconnected
+
+[module/weather]
+	type       = custom/script
+	exec       = curl -s 'wttr.in/modena?format=%t+%C' | sed 's/^+//g'
+	interval   = 600
+
+[module/pulseaudio]
+	type                            = internal/pulseaudio
+	format-volume-prefix            = "墳 "
+	format-volume-prefix-foreground = ${colors.col3}
+	format-volume                   = <label-volume>
+	label-volume                    = %percentage%%
+	label-muted                     = muted
+	label-muted-foreground          = ${colors.disabled}
+
+[module/lan]
+	interval        = 0.1
+	inherit         = network-base
+	interface-type  = wired
+	label-connected =  %downspeed%  %upspeed%
+
+[module/cpu]
+	type = internal/cpu
+
+	interval = 10
+
+	format = "<label>"
+    format-prefix   = "  "
+    format-prefix-foreground = ${colors.col3}
+	format-foreground = ${colors.colfg}
+	format-padding = 0
+
+	label = %percentage%%
+
+[module/memory]
+	type = internal/memory
+	label = %gb_used%
+	format = "<label>"
+    format-prefix   = "  "
+    format-prefix-foreground = ${colors.col3}
+	format-foreground = ${colors.colfg}
+	format-padding = 0
+
+[module/title]
+    type = internal/xwindow
+
+    format = <label>
+    format-foreground = ${color.fg-alt}
+
+    label = %title%
+    label-maxlen = 40
+
+[module/filesystem]
+    type                            = internal/fs
+    interval                        = 25
+
+    mount-0                         = /
+
+    label-mounted                   = "%percentage_used%%"
+    label-mounted-foreground        = %{colors.colfg}
+    label-unmounted                 = %mountpoint% not mounted
+    label-unmounted-foreground      = %{colors.foreground}
+
+    format-mounted                  = <label-mounted>
+    format-mounted-prefix           = " "
+    format-mounted-prefix-foreground = ${colors.col3}
+    format-mounted-padding          = 0
+    format-mounted-background       = ${colors.fg}
+
+[module/docker]
+    type = custom/script
+    exec = docker ps -q | wc -l
+    interval = 10
+    format-prefix =  "  "
+    format = "<label>"
+    label = %output%
+    format-prefix-foreground = ${colors.col3}
+	format-foreground = ${colors.colfg}
+
+[module/separator]
+    type = custom/text
+
+    content = "%{T3}|%{T-}"
+    content-foreground = ${colors.gray}
+    content-padding = 1
+

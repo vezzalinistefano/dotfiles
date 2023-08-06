@@ -22,27 +22,28 @@ _bc automatic_scheme longest_side
 _bc initial_polarity second_child
 _bc split_ratio	0.5
 _bc border_width 2
-_bc window_gap 8
+_bc window_gap 10
+_bc top_padding 20
 _bc pointer_modifier mod4
 _bc single_monocle true
 _bc gapless_monocle false
 
 ## Determine XrandR settings
 #_check ~/.local/bin/bspwm_dual_monitor && ~/.local/bin/bspwm_dual_monitor
-xrandr --output DP-0 --primary --mode 1920x1080 --rotate normal \
-    --output HDMI-0 --mode 1920x1080 --rate 75 --rotate normal --left-of DP-0 &
+xrandr --output DisplayPort-1 --primary --mode 1920x1080 --rotate normal \
+    --output HDMI-A-0 --mode 1920x1080 --rate 75 --rotate normal --left-of DisplayPort-1 &
 
 ## Define desktops per monitor
 #_check ~/.local/bin/bspwm_conf_desktops && ~/.local/bin/bspwm_conf_desktops
-bspc monitor DP-0 -d 1 2 3 4 5 6
-bspc monitor HDMI-0 -d 7 8 9 10
+bspc monitor DisplayPort-1 -d 1 2 3 4 5 6
+bspc monitor HDMI-A-0 -d 7 8 9 10
 
-## TODO Borders settings
-# source $HOME/.local/share/my_colours/tempus_night.sh
 _bc normal_border_color "#312e30"
 _bc active_border_color "#b1942b"
 _bc focused_border_color "#6da280"
 _bc presel_feedback_color "#2a2829"
+
+## Window rules
 
 # Autostart
 # -----------------------------------------------------------------------------
@@ -57,7 +58,7 @@ _check nitrogen && nitrogen --restore &
 
 _check flameshot && flameshot &
 
-_check pasystray && pasystray &
+_check pasystray && killall -q pasystray && pasystray &
 
 _check redshift && redshift -l 44.570480:10.905630 &
 
@@ -65,8 +66,12 @@ _check redshift && redshift -l 44.570480:10.905630 &
 _check xsetroot && xsetroot -xcf /usr/share/icons/Adwaita/cursors/left_ptr 16
 
 ## Compositor
-_check picom && picom &
-
+_check picom && picom --config /dev/null -r 3 -o 0.55 -l -2 -t -2 \
+                      -I 0.075 -O 0.075 -D 8 -f -i 1.0 -e 1.0 \
+                      --detect-transient --detect-client-leader --vsync \
+                      --backend glx --glx-no-stencil --glx-no-rebind-pixmap &
+## Megasync
+_check megasync && megasync && megasync &
 ## Keychain
 _check keychain && keychain &
 

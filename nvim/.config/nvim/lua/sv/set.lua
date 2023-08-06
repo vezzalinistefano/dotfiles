@@ -29,10 +29,11 @@ o.signcolumn        = "yes"
 
 o.updatetime        = 50
 
-o.colorcolumn       = "80"
+-- o.colorcolumn       = "80"
 
 vim.g.mapleader     = " "
 
-o.termguicolors     = true
+-- o.termguicolors     = true
+o.cursorline        = true
 
 o.isfname:append("@-@")

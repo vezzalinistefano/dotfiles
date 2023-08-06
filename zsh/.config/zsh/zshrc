@@ -213,6 +213,8 @@ cd() {
 	fi
 }
 
+bindkey -s ^f "tmux-sessionizer\n"
+
 # PLUGINS
 
 plugins=(ssh-agent)
