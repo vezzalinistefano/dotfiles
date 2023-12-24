@@ -60,7 +60,7 @@ _check flameshot && flameshot &
 
 _check pasystray && killall -q pasystray && pasystray &
 
-_check redshift && redshift -l 44.570480:10.905630 &
+_check redshift && killall -q redshift && redshift -l 44.570480:10.905630 &
 
 ## Use the same cursor everywhere
 _check xsetroot && xsetroot -xcf /usr/share/icons/Adwaita/cursors/left_ptr 16
@@ -70,6 +70,7 @@ _check picom && picom --config /dev/null -r 3 -o 0.55 -l -2 -t -2 \
                       -I 0.075 -O 0.075 -D 8 -f -i 1.0 -e 1.0 \
                       --detect-transient --detect-client-leader --vsync \
                       --backend glx --glx-no-stencil --glx-no-rebind-pixmap &
+_check xfce4-power-manager && xfce4-power-manager &
 ## Megasync
 _check megasync && megasync && megasync &
 ## Keychain
