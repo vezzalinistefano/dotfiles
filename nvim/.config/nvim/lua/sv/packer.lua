@@ -1,5 +1,3 @@
--- This file can be loaded by calling `lua require('plugins')` from your init.vim
-
 -- Only required if you have packer configured as `opt`
 vim.cmd.packadd('packer.nvim')
 
@@ -14,28 +12,21 @@ require('packer').startup(function(use)
     }
 
     -- Colors
-    use { "ellisonleao/gruvbox.nvim" }
-    use { "bluz71/vim-moonfly-colors", as = "moonfly" }
+    use({
+        'rose-pine/neovim',
+        as = 'rose-pine',
+        config = function()
+            vim.cmd('colorscheme rose-pine')
+        end
+    })
     --
 
-    use {
-        'nvim-treesitter/nvim-treesitter',
-        run = ':TSUpdate'
-    }
+    use({ 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' })
+    use({ 'ThePrimeagen/harpoon' })
+    use({ 'mbbill/undotree' })
+    use({ 'norcalli/nvim-colorizer.lua' })
+    use({ 'tpope/vim-fugitive' })
 
-    use { 'towolf/vim-helm' }
-
-    use { 'ThePrimeagen/harpoon' }
-
-    use { 'ggandor/leap.nvim' }
-
-    use { 'mbbill/undotree' }
-
-    use { 'norcalli/nvim-colorizer.lua' }
-
-    use('tpope/vim-fugitive')
-
-    use('tpope/vim-surround')
 
     use {
         "windwp/nvim-autopairs",
@@ -68,7 +59,8 @@ require('packer').startup(function(use)
     -- Debugger
     use { 'mfussenegger/nvim-dap' }
     use { 'leoluz/nvim-dap-go' }
-    use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
+    use { "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } }
+
     -- Status
     use 'nvim-tree/nvim-web-devicons'
     use {
