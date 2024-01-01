@@ -1,0 +1,32 @@
+[env]
+TERM = "xterm-256color"
+
+[font]
+size = 11
+
+[font.bold]
+family = "JetBrainsMono Nerd Font Mono"
+style = "Bold"
+
+[font.bold_italic]
+family = "JetBrainsMono Nerd Font"
+style = "Bold Italic"
+
+[font.glyph_offset]
+x = 0
+y = 0
+
+[font.italic]
+family = "JetBrainsMono Nerd Font"
+style = "Italic"
+
+[font.normal]
+family = "JetBrainsMono Nerd Font"
+style = "Medium"
+
+[window]
+opacity = 0.92
+
+[window.padding]
+x = 10
+y = 10
