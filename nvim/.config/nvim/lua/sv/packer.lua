@@ -27,6 +27,27 @@ require('packer').startup(function(use)
     use({ 'norcalli/nvim-colorizer.lua' })
     use({ 'tpope/vim-fugitive' })
 
+    use({
+        'rose-pine/neovim',
+        as = 'rose-pine',
+        config = function()
+            vim.cmd('colorscheme rose-pine')
+        end
+    })
+
+    use { 'towolf/vim-helm' }
+
+    use { 'ThePrimeagen/harpoon' }
+
+    use { 'ggandor/leap.nvim' }
+
+    use { 'mbbill/undotree' }
+
+    use { 'norcalli/nvim-colorizer.lua' }
+
+    use('tpope/vim-fugitive')
+
+    use('tpope/vim-surround')
 
     use {
         "windwp/nvim-autopairs",

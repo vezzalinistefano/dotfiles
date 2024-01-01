@@ -56,6 +56,14 @@ lsp.configure('lua_ls', {
     },
 })
 
+local omnisharp_bin = "/home/sv/.local/share/nvim/mason/bin/omnisharp"
+
+-- Omnisharp
+local lsp_config = require("lspconfig")
+lsp_config['omnisharp'].setup {
+    cmd = { omnisharp_bin, "--languageserver", "--hostPID", tostring(pid) }
+}
+
 lsp.on_attach(function(client, bufnr)
     local opts = { buffer = bufnr, remap = false }
 

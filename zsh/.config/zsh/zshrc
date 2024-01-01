@@ -53,6 +53,8 @@ zmodload zsh/complist
 compinit
 _comp_options+=(globdots) # Include hidden files.
 
+export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/gcr/ssh
+
 # Aliases
 # -----------------------------------------------------------------------------
 ## Pacman
