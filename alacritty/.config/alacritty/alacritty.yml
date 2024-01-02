@@ -1,0 +1,32 @@
+
+env:
+  TERM: xterm-256color
+
+font:
+  normal:
+    family: 'JetBrainsMono Nerd Font'
+    style: 'Medium'
+
+  italic:
+    family: 'JetBrainsMono Nerd Font'
+    style: 'Italic'
+
+  bold_italic:
+    family: 'JetBrainsMono Nerd Font'
+    style: 'Bold Italic'
+
+  size: 11
+
+  glyph_offset:
+    x: 0
+    y: 0
+
+window:
+  opacity: 0.92
+  padding:
+    x: 10
+    y: 10
+
+# TokyoNight alacritty colors
+import:
+  - /home/sv/.config/alacritty/themes/rose-pine.yml
