@@ -88,6 +88,13 @@ if _check apt; then
 	alias aar="sudo apt autoremove -V"
 fi
 
+## DNF
+if _check dnf; then
+    alias dcu="sudo dnf check-update"
+    alias dg="sudo dnf upgrade"
+    alias dug="sudo dnf check-update && sudo dnf upgrade"
+fi
+
 if _check kubectl; then
 	alias k="kubectl"
 
