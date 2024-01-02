@@ -47,7 +47,7 @@ SAVEHIST=10000000
 HISTFILE=~/.cache/zsh/history
 
 ## Basic auto/tab complete:
-autoload -U compinit
+autoload -Uz compinit
 zstyle ':completion:*' menu select
 zmodload zsh/complist
 compinit
@@ -92,7 +92,7 @@ if _check kubectl; then
 	alias k="kubectl"
 
 	# Tab completition for kubectl
-	source <(kubectl completion zsh | sed s/kubectl/k/g) 
+	source <(kubectl completion zsh) 
 fi
 
 ## Git commands
@@ -216,6 +216,10 @@ cd() {
 }
 
 bindkey -s ^f "tmux-sessionizer\n"
+# Fix to ctrl+r in tmux
+bindkey '^R' history-incremental-search-backward
+# Added ctrl+p for good measure, since that was also broken
+bindkey '^P' up-history
 
 # PLUGINS
 
@@ -226,13 +230,13 @@ if [ ! -d ~/.local/share/zsh/plugins/colorize ]; then
 fi
 
 # autosuggestions plugin
-source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+#source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 # zsh syntax highlighting
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source ~/.local/share/zsh/plugins/colorize/colorize.plugin.zsh
+#source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+#source ~/.local/share/zsh/plugins/colorize/colorize.plugin.zsh
 
 export PATH=$PATH:/home/sv/.local/bin
 
 # Azure CLI completition
 autoload bashcompinit && bashcompinit
-source '/home/sv/.local/bin/azure-cli/az.completion'
+#source '/home/sv/.local/bin/azure-cli/az.completion'
