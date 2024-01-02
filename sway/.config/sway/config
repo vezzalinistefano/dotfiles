@@ -231,7 +231,7 @@ mode "screenshot" {
 }
 bindsym $mod+Shift+v mode "screenshot"
 
-default_border pixel 2
+default_border pixel 3
 
 #
 # Status Bar:
@@ -248,7 +248,7 @@ bar {
     # status_command while date +'%Y-%m-%d %I:%M:%S %p'; do sleep 1; done
 
     colors {
-        active_workspace #ebbcba #f6c177 #191724
+        focused_workspace #ebbcba #f6c177 #191724
     #     statusline #ffffff
     #     background #323232
     #     inactive_workspace #32323200 #32323200 #5c5c5c
@@ -260,6 +260,9 @@ bar {
     font JetBrainsMono Nerd Font, 11
     position top
     status_command i3status-rs
+    colors {
+        focused_workspace #ebbcba #f6c177 #191724
+    }
 }
 #
 # Autostart
