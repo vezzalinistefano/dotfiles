@@ -257,7 +257,7 @@ bar {
 
 bar {
     output DP-1
-    font JetBrainsMono Nerd Font, 11
+    font JetBrainsMono Nerd Font, 10
     position top
     status_command i3status-rs
     colors {
@@ -268,7 +268,7 @@ bar {
 # Autostart
 #
 exec udiskie &
-exec swaync &
+exec dunst &
 exec wlsunset -l 44.6 -L 11.0 &
 exec /usr/libexec/polkit-gnome-authentication-agent-1 &
 
