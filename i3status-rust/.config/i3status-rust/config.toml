@@ -13,6 +13,10 @@ bat = ["|E|", "|_|", "|=|", "|F|"]
 bat_charging = "|^| "
 
 [[block]]
+block = "music"
+format = "$icon {$combo.str(max_w:35,rot_interval:0.5) $play $next |} "
+
+[[block]]
 block = "cpu"
 
 [[block]]
@@ -41,3 +45,18 @@ cmd = "pavucontrol"
 block = "time"
 interval = 5
 format = " $icon $timestamp.datetime(f:'%a %d/%m %R') "
+
+[[block]]
+block = "menu"
+text = " \uf011 "
+[[block.items]]
+display = " -&gt;   Sleep   &lt;-"
+cmd = "systemctl suspend"
+[[block.items]]
+display = " -&gt; Power Off &lt;-"
+cmd = "poweroff"
+confirm_msg = "Are you sure you want to power off?"
+[[block.items]]
+display = " -&gt;  Reboot   &lt;-"
+cmd = "reboot"
+confirm_msg = "Are you sure you want to reboot?"
