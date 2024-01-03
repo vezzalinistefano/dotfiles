@@ -7,7 +7,7 @@ set $down 	j
 set $up 	k
 set $right 	l
 set $term 	alacritty
-set $menu 	fuzzel 
+set $menu 	bemenu-run
 # dmenu_path | dmenu | xargs swaymsg exec --
 
 #
@@ -83,6 +83,9 @@ input type:keyboard {
 
     # Start your launcher
     bindsym $mod+d exec $menu
+
+    # Lock screen manually
+    bindsym Control+Alt+l exec swaylock -f -c 000000
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
@@ -270,6 +273,7 @@ bar {
 exec udiskie &
 exec dunst &
 exec wlsunset -l 44.6 -L 11.0 &
-exec /usr/libexec/polkit-gnome-authentication-agent-1 &
+exec nm-applet &
+exec_always /usr/libexec/polkit-gnome-authentication-agent-1 &
 
 include /etc/sway/config.d/*

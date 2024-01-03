@@ -64,6 +64,16 @@ lsp_config['omnisharp'].setup {
     cmd = { omnisharp_bin, "--languageserver", "--hostPID", tostring(pid) }
 }
 
+lsp_config.helm_ls.setup {
+  settings = {
+    ['helm-ls'] = {
+      yamlls = {
+        path = "yaml-language-server",
+      }
+    }
+  }
+}
+
 lsp.on_attach(function(client, bufnr)
     local opts = { buffer = bufnr, remap = false }
 
