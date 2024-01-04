@@ -60,7 +60,7 @@ export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/gcr/ssh
 ## Pacman
 if _check pacman; then
 	alias pass="pacman -Ss" # search
-	alias pasy="sudo pacman -Sy" # install
+	alias pasy="sudo pacman -S" # install
 	alias par="sudo pacman -R" # remove
 	alias pasyu="sudo pacman -Syu"
 
