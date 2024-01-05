@@ -23,6 +23,7 @@ o.hlsearch          = false
 o.incsearch         = true
 
 o.termguicolors     = true
+o.splitright        = true
 
 o.scrolloff         = 8
 o.signcolumn        = "yes"
