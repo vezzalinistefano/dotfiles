@@ -27,7 +27,7 @@ output DP-1 {
 gaps inner 5
 gaps outer 5
 gaps bottom 10
-output * bg /home/sv/Pictures/backgrounds/001.png fill
+output * bg /home/sv/Pictures/backgrounds/003.jpg fill
 
 #
 # Example configuration:
