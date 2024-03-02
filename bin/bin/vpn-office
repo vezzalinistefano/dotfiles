@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+function start_vpn {
+    wg-quick up $HOME/vpn/wg_config_sv.conf
+    echo "VPN connection to Officine Telematiche office started"
+}
+
+function stop_vpn {
+    wg-quick down $HOME/vpn/wg_config_sv.conf
+    echo "VPN connection closed"
+}
+
+case "$1" in
+    up)
+        start_vpn
+        ;;
+    down)
+        stop_vpn
+        ;;
+    *)
+        echo "Usage: vpn-office {up|down}"
+        exit 1
+        ;;
+esac
