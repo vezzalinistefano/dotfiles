@@ -53,6 +53,8 @@ zmodload zsh/complist
 compinit
 _comp_options+=(globdots) # Include hidden files.
 
+# SSH agent
+# https://wiki.archlinux.org/title/GNOME/Keyring#Setup_gcr
 export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/gcr/ssh
 
 # Aliases
