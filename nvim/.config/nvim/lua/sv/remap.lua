@@ -1,44 +1,40 @@
-local keymap_set = vim.keymap.set
+local map = vim.keymap.set
 vim.g.mapleader = " "
 
--- For NetRw
-keymap_set("n", "<leader>pv", vim.cmd.Ex)
--- For nvim-tree
+-- NetRw
+map("n", "<leader>pv", vim.cmd.Ex)
 
-keymap_set("v", "J",          ":m '>+1<CR>gv=gv")
-keymap_set("v", "K",          ":m '<-2<CR>gv=gv")
+map("v", "J", ":m '>+1<CR>gv=gv")
+map("v", "K", ":m '<-2<CR>gv=gv")
 
-keymap_set("n", "J",          "mzJ`z")
-keymap_set("n", "<C-d>",      "<C-d>zz")
-keymap_set("n", "<C-u>",      "<C-u>zz")
-keymap_set("n", "n",          "nzzzv")
-keymap_set("n", "N",          "Nzzzv")
+map("n", "J", "mzJ`z")
+map("n", "<C-d>", "<C-d>zz")
+map("n", "<C-u>", "<C-u>zz")
+map("n", "n", "nzzzv")
+map("n", "N", "Nzzzv")
 
 -- greatest remap ever
-keymap_set("x", "<leader>p",  "\"_dP")
-
+map("x", "<leader>p", "\"_dP")
 
 -- next greatest remap ever : asbjornHaland
-keymap_set("n", "<leader>y",  "\"+y")
-keymap_set("v", "<leader>y",  "\"+y")
+map("n", "<leader>y", "\"+y")
+map("v", "<leader>y", "\"+y")
 
-keymap_set("n", "<leader>Y",  "\"+Y")
+map("n", "<leader>Y", "\"+Y")
 
-keymap_set("n", "<leader>d",  "\"_d")
-keymap_set("v", "<leader>d",  "\"_d")
+map("n", "<leader>d", "\"_d")
+map("v", "<leader>d", "\"_d")
 
-keymap_set("i", "<C-c>",      "<Esc>")
-keymap_set("i", "jj",         "<Esc>")
-keymap_set("n", "Q",          "<nop>")
+map("i", "<C-c>", "<Esc>")
+map("i", "jj", "<Esc>")
+map("n", "Q", "<nop>")
 
-keymap_set("n", "<leader>f",  function() vim.lsp.buf.format() end)
+map("n", "<C-k>", "<cmd>cnext<CR>zz")
+map("n", "<C-j>", "<cmd>cprev<CR>zz")
+map("n", "<leader>k", "<cmd>lnext<CR>zz")
+map("n", "<leader>j", "<cmd>lprev<CR>zz")
 
-keymap_set("n", "<C-k>",      "<cmd>cnext<CR>zz")
-keymap_set("n", "<C-j>",      "<cmd>cprev<CR>zz")
-keymap_set("n", "<leader>k",  "<cmd>lnext<CR>zz")
-keymap_set("n", "<leader>j",  "<cmd>lprev<CR>zz")
+map("n", "<leader>s", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>")
+map("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
-keymap_set("n", "<leader>s",  ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>")
-keymap_set("n", "<leader>x",  "<cmd>!chmod +x %<CR>", { silent = true })
-
-keymap_set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
+map("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")

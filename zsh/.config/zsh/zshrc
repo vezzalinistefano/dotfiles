@@ -53,6 +53,8 @@ zmodload zsh/complist
 compinit
 _comp_options+=(globdots) # Include hidden files.
 
+# SSH agent
+# https://wiki.archlinux.org/title/GNOME/Keyring#Setup_gcr
 export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/gcr/ssh
 
 # Aliases
@@ -124,6 +126,10 @@ if _check git; then
     alias gsta="git status"
     alias gst="git status"
 
+    ## Get updates
+    alias gfa="git fetch --all"
+    alias gpu="git pull && git submodule update --checkout"
+
     ### branching
 	alias gch='git checkout'
 	alias gchb='git checkout -b'
@@ -132,6 +138,9 @@ if _check git; then
 	alias gpd='git push origin --delete'
 	alias gmerg='git merge --edit --stat --no-ff'
 	alias gmerge='git merge --edit --stat --no-ff'
+
+    ### submodules
+    alias gsupc="git submodule update --checkout"
 fi
 
 ## Kubernetes
@@ -237,12 +246,21 @@ if [ ! -d ~/.local/share/zsh/plugins/colorize ]; then
 fi
 
 # autosuggestions plugin
-#source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-# zsh syntax highlighting
-#source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-#source ~/.local/share/zsh/plugins/colorize/colorize.plugin.zsh
+if [ -f  /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh ]
+then
+    source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+fi
 
-export PATH=$PATH:/home/sv/.local/bin
+# zsh syntax zsh-syntax-highlighting
+if [ -f /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]
+then
+    source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
+
+if [ -f ~/.local/share/zsh/plugins/colorize/colorize.plugin.zsh ]
+then
+    source ~/.local/share/zsh/plugins/colorize/colorize.plugin.zsh
+fi
 
 # Azure CLI completition
 autoload bashcompinit && bashcompinit

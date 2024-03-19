@@ -14,7 +14,7 @@ bat_charging = "|^| "
 
 [[block]]
 block = "music"
-format = "$icon {$combo.str(max_w:35,rot_interval:0.5) $play $next |} "
+format = " $icon {$combo.str(max_w:100,rot_interval:0.5) $play $next |} "
 
 [[block]]
 block = "cpu"

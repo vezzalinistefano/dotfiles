@@ -27,7 +27,7 @@ output DP-1 {
 gaps inner 5
 gaps outer 5
 gaps bottom 10
-output * bg /home/sv/Pictures/backgrounds/001.png fill
+output * bg /home/sv/Pictures/backgrounds/003.jpg fill
 
 #
 # Example configuration:
@@ -99,6 +99,8 @@ input type:keyboard {
 
     # Exit sway (logs you out of your Wayland session)
     bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+
+    bindsym $mod+Shift+y sticky toggle
 #
 # Moving around:
 #

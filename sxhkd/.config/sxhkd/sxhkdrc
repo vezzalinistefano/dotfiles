@@ -10,6 +10,9 @@ super + {_, shift + } Return
 super + @space
     rofi -show drun -show-icons -font "hack 11" -display-drun "App"
 
+super + r
+    rofi -show emoji -mode emoji
+
 super + d
     rofi -show drun -show-icons -font "hack 11" -display-drun "App"
 
