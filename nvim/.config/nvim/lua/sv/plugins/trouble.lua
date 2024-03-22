@@ -9,14 +9,11 @@ return {
     config = function()
         require("trouble").setup({})
 
-        local trouble = require("trouble")
         local map = vim.keymap.set
 
-        map("n", "<leader>tt", function() trouble.toggle() end)
+        map("n", "<leader>tt", function() require("trouble").toggle("workspace_diagnostics") end)
 
-        map("n", "[d", function() trouble.next({ skip_groups = true, jump = true }) end)
-        map("n", "]d", function() trouble.previous({ skip_groups = true, jump = true }) end)
-
-        map("n", "<leader>ca", function() trouble.toggle("quickfix") end)
+        map("n", "[d", function() require("trouble").next({ skip_groups = true, jump = true }) end)
+        map("n", "]d", function() require("trouble").previous({ skip_groups = true, jump = true }) end)
     end
 }
