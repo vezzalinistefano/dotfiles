@@ -41,6 +41,8 @@ map("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
 map("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
 
+map("n", "<leader>gs", vim.cmd.Git, {})
+
 
 -- resize splits if window got resized
 vim.api.nvim_create_autocmd({ "VimResized" }, {
