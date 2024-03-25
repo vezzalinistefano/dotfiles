@@ -14,7 +14,10 @@ return {
         "saadparwaiz1/cmp_luasnip",
 
         -- Helm-ls
-        "towolf/vim-helm",
+        {
+            "towolf/vim-helm",
+            ft = "helm"
+        },
     },
     config = function()
         require("mason").setup()
