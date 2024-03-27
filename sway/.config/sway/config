@@ -230,6 +230,7 @@ bindsym $mod+r mode "resize"
 mode "screenshot" {
     bindsym s exec slurp | grim -g - - | wl-copy
     bindsym w exec grim -g "$(slurp)" - | swappy -f -
+
     bindsym Return mode "default"
     bindsym Escape mode "default"
 
@@ -279,3 +280,6 @@ exec nm-applet &
 exec_always /usr/libexec/polkit-gnome-authentication-agent-1 &
 
 include /etc/sway/config.d/*
+
+# For window settings
+for_window [app_id="firefox" title="Picture-in-Picture"] floating enable, resize set width 600 px height 300 px, move position 830 px 565 px, sticky on
