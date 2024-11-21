@@ -1,4 +1,3 @@
-local utils      = require "sv.utils"
 local o          = vim.opt
 
 o.guicursor      = ""
