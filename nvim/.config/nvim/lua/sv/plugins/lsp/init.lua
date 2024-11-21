@@ -18,6 +18,9 @@ return {
             "towolf/vim-helm",
             ft = "helm"
         },
+        {
+            "hashivim/vim-terraform"
+        }
     },
     config = function()
         require("mason").setup()
@@ -31,13 +34,67 @@ return {
                 function(server_name) -- default handler (optional)
                     require("lspconfig")[server_name].setup {}
                 end,
+                ["terraformls"] = function()
+                    local lspconfig = require "lspconfig"
+                    lspconfig.terraformls.setup {}
+                    vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+                        pattern = { "*.tf", "*.tfvars" },
+                        callback = function()
+                            vim.lsp.buf.format()
+                        end,
+                    })
+                end,
+                ["pyright"] = function()
+                    local lspconfig = require "lspconfig"
+                    lspconfig.pyright.setup {
+                        settings = {
+                            pyright = {
+                                -- Using Ruff's import organizer
+                                disableOrganizeImports = true,
+                            },
+                            python = {
+                                analysis = {
+                                    -- Ignore all files for analysis to exclusively use Ruff for linting
+                                    ignore = { '*' },
+                                },
+                            },
+                        },
+                    }
+                end,
+                ["ruff_lsp"] = function()
+                    require "lspconfig".ruff_lsp.setup {
+                        on_attach = function(client, bufnr)
+                            if client.name == 'ruff_lsp' then
+                                -- Disable hover in favor of Pyright
+                                client.server_capabilities.hoverProvider = false
+                            end
+                        end
+                    }
+                end,
                 ["lua_ls"] = function()
                     local lspconfig = require("lspconfig")
                     lspconfig.lua_ls.setup {
                         settings = {
                             Lua = {
+                                runtime = {
+                                    version = 'Lua 5.1',
+                                    path = {
+                                        '?.lua',
+                                        '?/init.lua',
+                                        vim.fn.expand '~/.luarocks/share/lua/5.1/?.lua',
+                                        vim.fn.expand '~/.luarocks/share/lua/5.1/?/init.lua',
+                                        '/usr/share/5.1/?.lua',
+                                        '/usr/share/lua/5.1/?/init.lua'
+                                    }
+                                },
+                                --  workspace = {
+                                --      library = {
+                                --          vim.fn.expand '~/.luarocks/share/lua/5.1',
+                                --          '/usr/share/lua/5.1'
+                                --      }
+                                -- },
                                 diagnostics = {
-                                    globals = { "vim" }
+                                    globals = { "vim", "kong" }
                                 }
                             }
                         }
@@ -53,11 +110,56 @@ return {
                                     additionalValuesFilesGlobPattern = "values.*.yaml",
                                 },
                                 yamlls = {
+                                    enabled = true,
                                     path = "yaml-language-server",
+                                    config = {
+                                        validate = true,
+                                        schemaStore = {
+                                            enable = true,
+                                            url = "https://www.schemastore.org/json",
+                                        },
+                                        schemas = {
+                                            ["https://raw.githubusercontent.com/datreeio/CRDs-catalog/main/argoproj.io/application_v1alpha1.json"] = {
+                                                "argocd_app-*.yaml",
+                                                "argocd_app-*.yml",
+                                            }
+                                        },
+                                    }
                                 }
                             }
                         }
                     }
+                end,
+                ["yamlls"] = function()
+                    local lspconfig = require("lspconfig")
+                    lspconfig.yamlls.setup {
+                        settings = {
+                            yaml = {
+                                validate = true,
+                                schemaStore = {
+                                    enable = true,
+                                    url = "https://www.schemastore.org/json",
+                                },
+                                schemas = {
+                                    ["https://raw.githubusercontent.com/datreeio/CRDs-catalog/main/argoproj.io/application_v1alpha1.json"] = {
+                                        "argocd_app-*.yaml",
+                                        "argocd_app-*.yml",
+                                    }
+                                },
+                            }
+                        }
+                    }
+                end,
+                ["jinja_lsp"] = function()
+                    vim.filetype.add {
+                        extension = {
+                            jinja = 'jinja',
+                            jinja2 = 'jinja',
+                            j2 = 'jinja',
+                        },
+                    }
+                    local lspconfig = require("lspconfig")
+                    lspconfig.jinja_lsp.setup {}
                 end
             }
         })
@@ -88,5 +190,10 @@ return {
             }
             )
         })
+
+        -- Snippets sourcing
+        require("luasnip.loaders.from_snipmate").lazy_load({ paths = "~/.config/nvim/lua/sv/plugins/snippets" })
+        local ls = require("luasnip")
+        vim.keymap.set({ "s" }, "<Tab>", function() ls.jump(1) end, { silent = true })
     end
 }

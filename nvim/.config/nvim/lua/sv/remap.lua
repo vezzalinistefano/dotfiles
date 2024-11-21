@@ -41,7 +41,14 @@ map("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
 map("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
 
-map("n", "<leader>gs", vim.cmd.Git, {})
+map("n", "<leader>gs", "<cmd>vertical G<CR>", {})
+map("n", "<leader>gw", "<cmd>Gwrite!<CR><cmd>wq<CR>", {})
+
+map("n", "<leader>n", "<cmd>bnext<CR>", {})
+map("n", "<leader>p", "<cmd>bprevious<CR>", {})
+map("n", "<leader>d", "<cmd>bdelete<CR>", {})
+
+map("t", "<Esc>", "<C-\\><C-n>")
 
 
 -- resize splits if window got resized
@@ -111,18 +118,24 @@ vim.api.nvim_create_autocmd('LspAttach', {
         vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
         vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
         vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
-        vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
+        vim.keymap.set('n', '<C-i>', vim.lsp.buf.signature_help, opts)
         vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, opts)
         vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
         vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, opts)
         vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
-        vim.keymap.set('n', '<leader>f', function()
-            if vim.bo.filetype == "yaml" then
-                local fileName = vim.api.nvim_buf_get_name(0)
-                vim.cmd(":silent %!prettier " .. fileName)
-            else
-                vim.lsp.buf.format { async = true }
-            end
-        end, opts)
+        vim.keymap.set('n', '<leader>f', function() vim.lsp.buf.format { async = true } end, opts)
     end,
+})
+
+vim.api.nvim_create_autocmd('LspAttach', {
+    group = StefanoVezzaliniGroup,
+    callback = function(ev)
+        local opts = { buffer = ev.buf }
+
+        map("n", "<leader>ti", ":!terraform init<CR>", opts)
+        map("n", "<leader>tv", ":!terraform validate<CR>", opts)
+        map("n", "<leader>tp", ":!terraform plan<CR>", opts)
+        map("n", "<leader>taa", ":!terraform apply -auto-approve<CR>", opts)
+    end,
+    pattern = { "*.tf", "*.tfvars" }
 })

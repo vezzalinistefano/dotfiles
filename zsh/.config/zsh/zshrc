@@ -37,6 +37,7 @@ eval "$(starship init zsh)"
 if _check nvim; then
     export EDITOR="nvim"
 	alias vimg="nvim +G +only"
+    alias e="nvim ."
 else
     export EDITOR="vim"
 fi
@@ -55,7 +56,7 @@ _comp_options+=(globdots) # Include hidden files.
 
 # SSH agent
 # https://wiki.archlinux.org/title/GNOME/Keyring#Setup_gcr
-export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/gcr/ssh
+#export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/gcr/ssh
 
 # Aliases
 # -----------------------------------------------------------------------------
@@ -99,6 +100,7 @@ fi
 
 if _check kubectl; then
 	alias k="kubectl"
+    alias kaf="kubectl apply -f"
 
 	# Tab completition for kubectl
 	source <(kubectl completion zsh) 
@@ -116,9 +118,14 @@ if _check git; then
 
 	# cloning
 	alias gclone="git clone"
+    if _check getclip; then
+        alias gcloneclip="git clone $(getclip)"
+    fi
 
     ### logs
-    alias glog="git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all"
+    alias glog="git log --all --decorate --oneline --graph"
+    alias glog2="git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all"
+
 
     alias glo="git log --oneline"
     alias gsho="git show --oneline"
@@ -128,6 +135,7 @@ if _check git; then
 
     ## Get updates
     alias gfa="git fetch --all"
+    alias gfap="git fetch --all --prune --prune-tags"
     alias gpu="git pull && git submodule update --checkout"
 
     ### branching
@@ -141,6 +149,12 @@ if _check git; then
 
     ### submodules
     alias gsupc="git submodule update --checkout"
+fi
+
+## Clipboard
+if _check xclip; then
+    alias setclip="xclip -selection c"
+    alias getclip="xclip -selection c -o"
 fi
 
 ## Kubernetes
@@ -232,6 +246,8 @@ cd() {
 }
 
 bindkey -s ^f "tmux-sessionizer\n"
+bindkey -s ^g "source ez-navigator\n"
+
 # Fix to ctrl+r in tmux
 bindkey '^R' history-incremental-search-backward
 # Added ctrl+p for good measure, since that was also broken
@@ -246,15 +262,15 @@ if [ ! -d ~/.local/share/zsh/plugins/colorize ]; then
 fi
 
 # autosuggestions plugin
-if [ -f  /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh ]
+if [ -f  /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]
 then
-    source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+    source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 fi
 
 # zsh syntax zsh-syntax-highlighting
-if [ -f /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]
+if [ -f /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]
 then
-    source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+    source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
 
 if [ -f ~/.local/share/zsh/plugins/colorize/colorize.plugin.zsh ]

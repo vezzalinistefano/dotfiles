@@ -6,7 +6,6 @@ function Colorize(color)
     vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
     vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
     vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
-
 end
 
 return {
@@ -43,14 +42,22 @@ return {
 
     -- Gruvbox
     {
-        "ellisonleao/gruvbox.nvim",
+        "sainnhe/gruvbox-material",
         priority = 1000,
         opts = ...,
-        config = function()
-            -- Colorize("gruvbox")
+        config = function(_, opts)
+            vim.o.background = "dark" -- or "light" for light mode
+            Colorize("gruvbox")
         end
     },
-
+    {
+        "ellisonleao/gruvbox.nvim",
+        priority = 1000,
+        config = function(_, opts)
+            Colorize("gruvbox")
+        end,
+        opts = ...
+    },
     -- Rose Pine
     {
         "rose-pine/neovim",
@@ -62,8 +69,7 @@ return {
         config = function(_, opts)
             require("rose-pine").setup(opts)
 
-            Colorize("rose-pine")
+            -- Colorize("rose-pine")
         end
     }
-
 }
