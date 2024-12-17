@@ -17,9 +17,6 @@ return {
         {
             "towolf/vim-helm",
             ft = "helm"
-        },
-        {
-            "hashivim/vim-terraform"
         }
     },
     config = function()
@@ -59,16 +56,6 @@ return {
                                 },
                             },
                         },
-                    }
-                end,
-                ["ruff_lsp"] = function()
-                    require "lspconfig".ruff_lsp.setup {
-                        on_attach = function(client, bufnr)
-                            if client.name == 'ruff_lsp' then
-                                -- Disable hover in favor of Pyright
-                                client.server_capabilities.hoverProvider = false
-                            end
-                        end
                     }
                 end,
                 ["lua_ls"] = function()

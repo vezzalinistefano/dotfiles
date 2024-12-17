@@ -50,15 +50,3 @@ vim.filetype.add ({
         ['.*.yaml.tftpl'] = 'yaml'
     }
 })
-
--- vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "CursorHoldI", "CursorHold" }, {
---     group = StefanoVezzaliniGroup,
---     command = "if mode() != 'c' | checktime | endif",
---     pattern = { "*" }
--- })
-
--- vim.api.nvim_create_autocmd({"BufRead", "BufNewFile"}, {
---     group = StefanoVezzaliniGroup,
---     command = "if mode() != 'c' | checktime | endif",
---     pattern = { "*.tftpl" }
--- })
