@@ -1,25 +1,24 @@
 return {
-    "williamboman/mason.nvim",
+    "neovim/nvim-lspconfig",
     dependencies = {
+        "stevearc/conform.nvim",
+        "williamboman/mason.nvim",
         "williamboman/mason-lspconfig.nvim",
-        "neovim/nvim-lspconfig",
-
         "hrsh7th/cmp-nvim-lsp",
         "hrsh7th/cmp-buffer",
         "hrsh7th/cmp-path",
         "hrsh7th/cmp-cmdline",
         "hrsh7th/nvim-cmp",
-
         "L3MON4D3/LuaSnip",
         "saadparwaiz1/cmp_luasnip",
-
-        -- Helm-ls
-        {
-            "towolf/vim-helm",
-            ft = "helm"
-        }
+        "j-hui/fidget.nvim",
     },
+
     config = function()
+        require("conform").setup({
+            formatters_by_ft = {
+            }
+        })
         require("mason").setup()
         require("mason-lspconfig").setup({
             ensure_installed = {

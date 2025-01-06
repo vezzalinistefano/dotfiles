@@ -9,6 +9,8 @@ return {
         opts = {
             highlight = { enable = true, },
             indent = { enable = true, },
+            auto_install = true;
+            sync_install = false;
             ensure_installed = {
                 "bash",
                 "go",

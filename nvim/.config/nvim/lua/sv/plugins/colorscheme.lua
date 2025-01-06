@@ -77,7 +77,7 @@ return {
         priority=1000,
         config = function(_, opts)
             require("catppuccin").setup(opts)
-            vim.cmd.colorscheme("carbonfox")
+            -- vim.cmd.colorscheme("carbonfox")
         end
     },
 
@@ -107,7 +107,7 @@ return {
         "ellisonleao/gruvbox.nvim",
         priority = 1000,
         config = function(_, opts)
-            -- Colorize("gruvbox")
+            Colorize("gruvbox")
         end,
         opts = ...
     },
